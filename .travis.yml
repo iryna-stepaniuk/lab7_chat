@@ -1,10 +1,6 @@
 language: node_js
 node_js:
   - "9"
-
 deploy:
-  # deploy app as api server
-  - provider: heroku
-    skip_cleanup: true
-      api-key:
-        secure: $HEROKU_API_KEY
+  provider: heroku:git
+  api_key: $HEROKU_CONFIG_KEY
