@@ -1,9 +1,10 @@
 language: node_js
 node_js:
-  - "stable"
-script:
-  - npm install --prefix ./client
-  - npm run --prefix ./client build
-  - npm run deploy
-after_success:
-  - npm run start
+  - "9"
+
+deploy:
+  # deploy app as api server
+  - provider: heroku
+    skip_cleanup: true
+      api-key:
+        secure: $HEROKU_API_KEY
