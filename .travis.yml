@@ -3,7 +3,7 @@ node_js:
   - "12.14.0"
 
 script:
-  - npm run build --prefix ./client
+  - npm run --prefix ./client build
 
 deploy:
   provider: heroku:git
