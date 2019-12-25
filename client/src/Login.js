@@ -103,7 +103,7 @@ class Login extends React.Component {
                         </Button>
                         <Grid container>
                             <Grid item>
-                                <Link href="/signup" variant="body2">
+                                <Link to="/signup" variant="body2">
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>
@@ -116,7 +116,7 @@ class Login extends React.Component {
                 <div className="align-center">
                     <p>or you can chat as anonymous</p>
                     <Button variant="outlined" color="primary">
-                       <Link href="/chat">Go to Chat</Link>
+                       <Link to="/chat">Go to Chat</Link>
                     </Button>
                 </div>
             </Container>
