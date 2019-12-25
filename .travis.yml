@@ -8,5 +8,4 @@ script:
 
 deploy:
   provider: heroku:git
-  api_key:
-    secure: $HEROKU_CONFIG_KEY
+  api_key: 277ab0a4-d448-40dc-8342-cb44b8d214ed
