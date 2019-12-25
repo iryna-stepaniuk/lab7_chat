@@ -1,13 +1,13 @@
 language: node_js
 node_js:
-  - "12.14.0"
-
+- 12.14.0
 script:
-  - npm install --prefix ./client
-  - npm run --prefix ./client build
-
+- npm install --prefix ./client
+- npm run --prefix ./client build
 deploy:
-  provider: heroku:git
-  api:
-    key:
-      secure: AQIy1VnoaSnRHzXQ1g5txM4MeoJ923yaTok5Y5k2xU8cHrREhv/wCc+M2nttFF0EUVSHVbArVXK4+cHJSnbPuL5Qvs3FdeaxAMaQI1Hwjb3EXYmc8c2VIy8zCYMwJRSQvWA5lrRvOc1WZDTd69g86I4Eu4rWgC+UbtsmShVEi7B/lkgfKU5spDtkzM2/bjfCh72+bBq7f9nVjHTrBggqLfN6ezLedwKfVfazV/l0pViN/MyzPhmQ/oh2xDZHXHf3o8ZXk5howDevH6ExmTzrtye7aRVi0yYacOeZcT13MmqOwJDCy2ttL6MU6IgGOaKclRG7ZBVytUYQbrvsIPc11lljD5NTp4uTh6e+Yfwvkeyj66SEUPFzSTvsKIfXGP2EQ2le819sn2MD0q8huSc00/q0FjUr/unFalOm+cQQK25BMT6x3zT1ZCa4gTRvi6s1ymlA+ejt4lHfUWmuZnxY/mVdA0zB0hcZWIC2B/XI6yxDWBJP+GgKm4jJsBf/NWligQBXgjOP5jg05bgSEfIY29Qsc3sUOga8NM/ZVr2lVbtWFthdQS73m9Yv6gyvXXI9dib0Iv7A7OnExf72m31O/Pwl8wRQWDe7dCfGMqftNqhB/+OPKUBV8EMjZY4ijTazSm3tkNSM0qGbqVivCE7nlNcW8tQW4MhHS5XkHlkar4E=
+  provider: heroku
+  api_key:
+    secure: APd1AhLdpd54P95KLZW4zNWmqq77MGgsNml+hEAC1cBrq6xfPjFWJON3Np65+wfE3ZkrywQ/lI38NQrhBV378StIgNDBgrtUTlqfFzJVcRCrSpl1jFRbsKOMvKRKGXNKuFUyYpXvK7kkG0ulz3SNLf2RryEDA3+REretJwuxo7tlsTnc8swnCW9VvkVWurEiYPS/mmNwrmIe11dsJVhA9dQpzX9MhZv83b7d4pQBzou7DX6j64Gi1+N/On2m4gEswx70DUSbzSKzrdEhgEuwW9tz55s7EmffVxIHFNcvebLMjkVJe7AKiBNDteZPLuyd4fBZAuzoO3MWOCQb71Fw+R/b5xCVzxGL8cW8Bt41DkXc9awxy1cLFEOyF/4k1WN20gttcLVQsZnCLANPSuuoOLIWadUagp+xs++9QMCX4NlFwbFJjLbuWqmqd+9ARHl41b1l2V6MJopfe+J8dbwgzHT6MxbSkIVi7WzHe5ZyCoi2mHZz+PYnUX6OtlrHDd/sinnQqHIkdfYTaWYrfAVqGBOxC7FgM3i8vZoG8RyjrsC2esfPPpmnJQTbBZuCEOPmc9z2vIyZuRxHRuS95WcBRizSI/H+Qczs4GTvKQb2NqzeGFqybWS4qUuL9+eRWeRvQJuAYp2WjMIlrOr11e1VDENTzni0zpDxoCp0Xp1Sofc=
+  app: lab7_chat
+  on:
+    repo: iryna-stepaniuk/lab7_chat
