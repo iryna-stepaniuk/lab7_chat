@@ -1,6 +1,11 @@
 language: node_js
 node_js:
-  - "9"
+  - "latest"
+
+script:
+  - npm run build --prefix ./client
+
 deploy:
   provider: heroku:git
-  api_key: $HEROKU_CONFIG_KEY
+  api_key:
+    secure: $HEROKU_CONFIG_KEY
