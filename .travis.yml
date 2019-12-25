@@ -1,10 +1,6 @@
 language: node_js
-node_js:
-  - "latest"
-
 script:
   - npm run build --prefix ./client
-
 deploy:
   provider: heroku:git
   api_key:
