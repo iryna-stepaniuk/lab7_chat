@@ -6,9 +6,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Button from "@material-ui/core/Button";
 import Header from "./Header";
-
 import {animateScroll} from "react-scroll";
-import moment from "moment";
 
 class Chat extends React.Component {
     constructor(props) {
@@ -71,6 +69,11 @@ class Chat extends React.Component {
         db.collection('messages').doc().set(messageData);
     }
 
+    getFormattedDate(dateString) {
+        const date = new Date(dateString);
+        return `${date.getDay()}.${date.getMonth()}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
+    }
+
     render() {
         const messages = this.state.messages;
 
@@ -85,7 +88,7 @@ class Chat extends React.Component {
                                     </span>
                                     <ListItemText
                                         primary={message.message}
-                                        secondary={`by ${(message.name || 'anonymous')}  ${moment(message.date).fromNow()}`}
+                                        secondary={`by ${(message.name || 'anonymous')}  ${this.getFormattedDate(message.date)}`}
                                     />
                                 </ListItem>
                             )

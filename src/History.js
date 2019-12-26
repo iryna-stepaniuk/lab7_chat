@@ -3,10 +3,10 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import {animateScroll} from "react-scroll";
-import moment from "moment";
 
 import Header from "./Header";
 import {db} from "./index.js";
+
 class History extends React.Component {
     constructor(props) {
         super(props);
@@ -15,7 +15,7 @@ class History extends React.Component {
             this.setState({messages: messages.reverse()});
         });
 
-         this.state = {
+        this.state = {
             messages: [],
             userName: window.localStorage.getItem('name'),
             authorized: window.localStorage.getItem('authorized'),
@@ -40,6 +40,11 @@ class History extends React.Component {
         });
     }
 
+    getFormattedDate(dateString) {
+        const date = new Date(dateString);
+        return `${date.getDay()}.${date.getMonth()}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
+    }
+
     render() {
         const messages = this.state.messages;
 
@@ -55,7 +60,7 @@ class History extends React.Component {
                                     </span>
                                     <ListItemText
                                         primary={message.message}
-                                        secondary={`by ${(message.name || 'anonymous')}  ${moment(message.date).fromNow()}`}
+                                        secondary={`by ${(message.name || 'anonymous')}  ${this.getFormattedDate(message.date)}`}
                                     />
                                 </ListItem>
                             )
