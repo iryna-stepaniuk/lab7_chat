@@ -1,5 +1,4 @@
 import React from 'react';
-import io from "socket.io-client";
 import TextField from "@material-ui/core/TextField";
 import {db} from "./index.js";
 import List from "@material-ui/core/List";
@@ -17,17 +16,20 @@ class Chat extends React.Component {
 
         this.sendMessage = this.sendMessage.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.socket = io.connect();
-        this.getMessages().then(messages => {
-            this.setState({messages: messages.reverse()});
-        });
 
-        this.socket.on('chat message', (data) => {
-            const messageData = JSON.parse(data);
-            this.setState(previousState => ({
-                messages: [...previousState.messages, messageData]
-            }));
-        });
+        db.collection("messages")
+            .orderBy("date")
+            .onSnapshot(querySnapshot => {
+                const messages = querySnapshot.docs.map(doc => {
+                    return doc.data()
+                });
+                console.info(messages);
+
+                this.setState({messages});
+
+            });
+
+
         this.state = {
             messages: [],
             userName: window.localStorage.getItem('name'),
@@ -49,14 +51,6 @@ class Chat extends React.Component {
         });
     }
 
-    getMessages() {
-        return db.collection('messages').orderBy("date", "desc").limit(30).get().then((postObj) => {
-            return postObj.docs.map(doc => {
-                return doc.data()
-            })
-        });
-    }
-
     handleInputChange(event) {
         const target = event.target;
         const value = target.value;
@@ -68,13 +62,13 @@ class Chat extends React.Component {
     }
 
     sendMessage() {
-        const dataToSend = {
+        const messageData = {
             name: this.state.authorized ? this.state.userName : null,
             message: this.state.msg,
-            date: new Date()
+            date: new Date().toString()
         };
 
-        this.socket.emit('chat message', JSON.stringify(dataToSend));
+        db.collection('messages').doc().set(messageData);
     }
 
     render() {

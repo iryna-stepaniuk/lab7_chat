@@ -1,13 +1,8 @@
 language: node_js
 node_js:
-- 12.14.0
+  - node
 script:
-- npm install --prefix ./client
-- npm run --prefix ./client build
-deploy:
-  provider: heroku
-  api_key:
-    secure: I3eRV0JTAIpD+tHuxuFcdT11HPpyMdZ3kBwZJG/HHBNDiA7qkw2kBW/6qV4UXu1pB8LsWeT6Y8diBi+cMKgqVXSCHUmXUB8oFVDXFeZpDXMlESKGwSV2Ol+y6xCaQu0pDM/DW4eWgLe1oAFyFx5tjrm7Io71UnVOildDn9f9bVgeV4ifcZO1ARFHu6Z/kTwgybnX+B5XI89okY5FIe0zQVuuzORuPSwFp0NH1qhanAml8YnkbQqgmJvtTSYD6bL33RaBCLkGzYjhVwhDeEiTtrMrp2bO3Rs7WZhsjk0q1elzMb40pFW2AGPL61DnMUG/dg+PoewoZuSiOqd+sT1gznhyrJGFy84H+nFpQj7GKuT/rq5juwzBKNAAKbnoL0k3WlLNwSIltnwd90VRerm62cOGvLgD8uYXHwbA4OP9cE0lVHbMT1JEog6hH/54k7gZddohxppMjYb3iInstioiNc2UOgEAFbJNHWFKsX/wVeQJKY6YqOAKDzxv32nIcaEcPs3EzL7cLRpTdknXZh4MVXw14DCajIteJnPvRcRbqQH8khc7McM+6LAjU19+IDcBbarP0ydrfw/Iy6j+tgiDrhSawkdpwkaMySUVKvN2qM43mlkqmP8qbEs6BgVR7yKWwmIqZaDJ6BXjkL94IzrW1VY/5ZxdoIr4N9TXPrmbXMs=
-  app: deploy-chat
-  on:
-    repo: iryna-stepaniuk/lab7_chat
+  - npm run deploy
+branches:
+  only:
+    - master
