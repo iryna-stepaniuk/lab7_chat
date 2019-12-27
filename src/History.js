@@ -18,7 +18,7 @@ class History extends React.Component {
         this.state = {
             messages: [],
             userName: window.localStorage.getItem('name'),
-            authorized: window.localStorage.getItem('authorized'),
+            authorized: window.localStorage.getItem('authorized'),  //you have firebase.auth which has the same method to check auth state
         };
     }
 

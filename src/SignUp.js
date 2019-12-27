@@ -23,7 +23,7 @@ export default class SignUp extends React.Component {
 
         firebase.auth()
             .createUserWithEmailAndPassword(this.state.email, this.state.password).then((authData) => {
-            db.collection("users").doc(authData.user.uid).set({
+            db.collection("users").doc(authData.user.uid).set({  // todo: no security rule precent to block unautorized access
                 name: this.state.name
             }).then(() => {
                 this.setState({succsess:true})
