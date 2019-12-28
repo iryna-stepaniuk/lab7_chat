@@ -1,3 +1,7 @@
+:root {
+    --main-grey: #b5b5b5;
+}
+
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -7,11 +11,6 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
 .footer {
     position: relative;
 }
@@ -19,27 +18,27 @@ code {
 .messages-block {
     height: calc(100vh - 130px);
     overflow: auto;
-    box-shadow: inset 1px 1px 6px 1px #b5b5b5;
+    box-shadow: inset 1px 1px 6px 1px var(--main-grey)
 }
 
 .history.messages-block {
     height: calc(100vh - 80px);
 }
 
-.send-button {
-    position: absolute !important;
+.MuiButton-root.send-button {
+    position: absolute;
     right: 20px;
     top: 5px;
 }
 
+.MuiButton-root.header-button {
+    margin: 5px;
+}
+
 .anonymous {
-    color: #b5b5b5;
+    color: var(--main-grey);
 }
 
 .align-center {
     text-align: center;
-}
-
-button {
-    margin: 5px!important;
 }
