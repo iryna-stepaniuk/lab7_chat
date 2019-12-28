@@ -71,7 +71,7 @@ class Chat extends React.Component {
 
     getFormattedDate(dateString) {
         const date = new Date(dateString);
-        return `${date.getDay()}.${date.getMonth()}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
+        return `${date.getDate()}.${date.getMonth()}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
     }
 
     render() {
