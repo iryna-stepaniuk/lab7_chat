@@ -8,6 +8,7 @@ import Container from '@material-ui/core/Container';
 import firebase from 'firebase';
 import {Redirect} from "react-router-dom";
 import {db} from "./index.js";
+import {isUserAuthorized} from "./utils";
 
 
 class Login extends React.Component {
@@ -38,11 +39,7 @@ class Login extends React.Component {
             .signInWithEmailAndPassword(this.state.email, this.state.password)
             .then((authData) => {
                 db.collection("users").doc(authData.user.uid).get().then((doc) => {
-                    const user = doc.data();
-
-                    if (user) {
-                        window.localStorage.setItem('authorized', true);
-                        window.localStorage.setItem('name', user.name);
+                    if (isUserAuthorized()) {
                         this.setState({authorized: true})
                     }
                 })

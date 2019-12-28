@@ -4,10 +4,7 @@ import React from "react";
 
 
 function Logout() {
-    firebase.auth().signOut().then(() => {
-        window.localStorage.clear();
-    }).catch((err) => {
-    });
+    firebase.auth().signOut();
 
     return (<Redirect to='/login'/>)
 }

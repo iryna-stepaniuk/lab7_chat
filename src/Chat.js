@@ -7,6 +7,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Button from "@material-ui/core/Button";
 import Header from "./Header";
 import {animateScroll} from "react-scroll";
+import {isUserAuthorized, getUserName} from "./utils";
 
 class Chat extends React.Component {
     constructor(props) {
@@ -14,25 +15,15 @@ class Chat extends React.Component {
 
         this.sendMessage = this.sendMessage.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
-
-        db.collection("messages")
-            .orderBy("date")
-            .onSnapshot(querySnapshot => {
-                const messages = querySnapshot.docs.map(doc => {
-                    return doc.data()
-                });
-                console.info(messages);
-
-                this.setState({messages});
-
-            });
-
-
+        this.handleKeyDown = this.handleKeyDown.bind(this);
         this.state = {
             messages: [],
-            userName: window.localStorage.getItem('name'),
-            authorized: window.localStorage.getItem('authorized'),
+            userName: getUserName(),
+            authorized: isUserAuthorized(),
+            msg: ""
         };
+
+        this.updateMessages();
     }
 
     componentDidMount() {
@@ -47,6 +38,15 @@ class Chat extends React.Component {
         animateScroll.scrollToBottom({
             containerId: "messages-block"
         });
+    }
+
+    updateMessages() {
+        db.collection("messages")
+            .orderBy("date")
+            .onSnapshot(querySnapshot => {
+                const messages = querySnapshot.docs.map(doc => doc.data());
+                this.setState({messages});
+            });
     }
 
     handleInputChange(event) {
@@ -67,11 +67,18 @@ class Chat extends React.Component {
         };
 
         db.collection('messages').doc().set(messageData);
+        this.setState({msg: ''})
     }
 
     getFormattedDate(dateString) {
         const date = new Date(dateString);
         return `${date.getDate()}.${date.getMonth()}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
+    }
+
+    handleKeyDown(e) {
+        if (e.key === 'Enter') {
+            this.sendMessage()
+        }
     }
 
     render() {
@@ -82,10 +89,8 @@ class Chat extends React.Component {
                 <Header userName={this.state.userName} authorized={this.state.authorized} title={'Chat'}/>
                 <List id="messages-block" className='messages-block'>
                     {
-                        messages.map(message => {
-                            return (<ListItem>
-                                    <span>
-                                    </span>
+                        messages.map((message, index) => {
+                            return (<ListItem key={index}>
                                     <ListItemText
                                         primary={message.message}
                                         secondary={`by ${(message.name || 'anonymous')}  ${this.getFormattedDate(message.date)}`}
@@ -102,8 +107,9 @@ class Chat extends React.Component {
                                    name='msg'
                                    onChange={this.handleInputChange}
                                    autoFocus={true}
-                                   autoCmplete={false}
-                                   autocomplete="off"
+                                   autoComplete="off"
+                                   onKeyDown={this.handleKeyDown}
+                                   value={this.state.msg}
                         />
                         <Button variant="outlined" className='send-button' onClick={this.sendMessage}>
                             Send

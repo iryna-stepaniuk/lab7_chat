@@ -30,15 +30,16 @@ export default function Header(props) {
                         {props.title}
                     </Typography>
                     {auth && (
-                        <Typography> Your are logged in as {props.userName}</Typography>
+                        <Typography> You are logged in as {props.userName}</Typography>
                     )}
-                    <Button variant="contained" color="default">{auth
+                    <Button className="header-button" variant="contained" color="default">{auth
                         ? <Link to="/logout">logout</Link>
                         : <Link to="/login">login</Link>}
                     </Button>
                     {auth && (
-                        <Button variant="contained" color="default"> <Link to="/history">history</Link> </Button>)}
-                    {auth && (<Button variant="contained" color="default"> <Link to="/chat">Chat</Link> </Button>)}
+                        <Button className="header-button" variant="contained" color="default"> <Link to="/history">history</Link> </Button>)}
+                    {auth && (
+                        <Button className="header-button" variant="contained" color="default"> <Link to="/chat">Chat</Link> </Button>)}
                 </Toolbar>
             </AppBar>
         </div>

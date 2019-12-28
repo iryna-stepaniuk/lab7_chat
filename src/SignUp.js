@@ -8,7 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import firebase from "firebase";
-import {db} from "./index.js";
+
 export default class SignUp extends React.Component {
     constructor(props) {
         super(props);
@@ -18,21 +18,28 @@ export default class SignUp extends React.Component {
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
+    saveUserName() {
+        const currentUser = firebase.auth().currentUser;
+
+        if (currentUser) {
+            currentUser.updateProfile({
+                displayName: this.state.name,
+            });
+            this.setState({success: true})
+        }
+    }
+
     signUpRequest(e) {
         e.preventDefault();
 
         firebase.auth()
-            .createUserWithEmailAndPassword(this.state.email, this.state.password).then((authData) => {
-            db.collection("users").doc(authData.user.uid).set({  // todo: no security rule precent to block unautorized access
-                name: this.state.name
-            }).then(() => {
-                this.setState({succsess:true})
-            })
-        }, (error) => {
-            this.setState({error: error.message})
-        });
+            .createUserWithEmailAndPassword(this.state.email, this.state.password)
+            .then(() => {
+                this.saveUserName();
+            }, (error) => {
+                this.setState({error: error.message})
+            });
     }
-
 
     handleInputChange(event) {
         const target = event.target;
@@ -45,10 +52,9 @@ export default class SignUp extends React.Component {
     }
 
     render() {
-        if(this.state.succsess) {
-            return(<Redirect to='/login'/>)
+        if (this.state.success) {
+            return (<Redirect to='/login'/>)
         }
-
 
         return (
             <Container component="main" maxWidth="xs">

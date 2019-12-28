@@ -3,9 +3,10 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import {animateScroll} from "react-scroll";
-
 import Header from "./Header";
 import {db} from "./index.js";
+import {getUserName, isUserAuthorized} from "./utils";
+import {Redirect} from "react-router-dom";
 
 class History extends React.Component {
     constructor(props) {
@@ -17,8 +18,8 @@ class History extends React.Component {
 
         this.state = {
             messages: [],
-            userName: window.localStorage.getItem('name'),
-            authorized: window.localStorage.getItem('authorized'),  //you have firebase.auth which has the same method to check auth state
+            userName: getUserName(),
+            authorized: isUserAuthorized(),
         };
     }
 
@@ -47,6 +48,12 @@ class History extends React.Component {
 
     render() {
         const messages = this.state.messages;
+
+        if (!this.state.authorized) {
+            return (
+                <Redirect to='/chat'/>
+            )
+        }
 
         return (
             <div>
