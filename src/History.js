@@ -5,7 +5,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import {animateScroll} from "react-scroll";
 import Header from "./Header";
 import {db} from "./index.js";
-import {getUserName, isUserAuthorized} from "./utils";
+import {getFormattedDate, getUserName, isUserAuthorized} from "./utils";
 import {Redirect} from "react-router-dom";
 
 class History extends React.Component {
@@ -41,11 +41,6 @@ class History extends React.Component {
         });
     }
 
-    getFormattedDate(dateString) {
-        const date = new Date(dateString);
-        return `${date.getDay()}.${date.getMonth()}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
-    }
-
     render() {
         const messages = this.state.messages;
 
@@ -67,7 +62,7 @@ class History extends React.Component {
                                     </span>
                                     <ListItemText
                                         primary={message.message}
-                                        secondary={`by ${(message.name || 'anonymous')}  ${this.getFormattedDate(message.date)}`}
+                                        secondary={`by ${(message.name || 'anonymous')}  ${getFormattedDate(message.date)}`}
                                     />
                                 </ListItem>
                             )

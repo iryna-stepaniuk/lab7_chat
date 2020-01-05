@@ -7,7 +7,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Button from "@material-ui/core/Button";
 import Header from "./Header";
 import {animateScroll} from "react-scroll";
-import {isUserAuthorized, getUserName} from "./utils";
+import {isUserAuthorized, getUserName, getFormattedDate} from "./utils";
 
 class Chat extends React.Component {
     constructor(props) {
@@ -70,11 +70,6 @@ class Chat extends React.Component {
         this.setState({msg: ''})
     }
 
-    getFormattedDate(dateString) {
-        const date = new Date(dateString);
-        return `${date.getDate()}.${date.getMonth()}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
-    }
-
     handleKeyDown(e) {
         if (e.key === 'Enter') {
             this.sendMessage()
@@ -93,7 +88,7 @@ class Chat extends React.Component {
                             return (<ListItem key={index}>
                                     <ListItemText
                                         primary={message.message}
-                                        secondary={`by ${(message.name || 'anonymous')}  ${this.getFormattedDate(message.date)}`}
+                                        secondary={`by ${(message.name || 'anonymous')}  ${getFormattedDate(message.date)}`}
                                     />
                                 </ListItem>
                             )
